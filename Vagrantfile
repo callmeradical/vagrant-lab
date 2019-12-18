@@ -6,18 +6,21 @@ Vagrant.configure('2') do |config|
   # boxes at https://vagrantcloud.com/search.
   # config.vm.box = 'ubuntu/xenial64'
 
+  Vagrant.configure("2") do |config|
+	  config.vm.network "private_network", auto_config: true
+	end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  config.vm.network 'private_network', type: 'dhcp'
   (1..4).each do |i|
     if i != 4
       config.vm.define "node-#{i}" do |node|
-        node.vm.box = 'ubuntu/xenial64'
+        node.vm.box = 'ubuntu/bionic64'
       end
     else
       config.vm.define 'workstation' do |node|
-        node.vm.box = 'ubuntu/xenial64'
+        node.vm.box = 'ubuntu/bionic64'
       end
     end
   end
@@ -29,21 +32,8 @@ Vagrant.configure('2') do |config|
     vb.memory = '512'
   end
 
-  config.vm.provision 'shell', inline: <<-SHELL
-    apt-get update
-    apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-    add-apt-repository \
-    'deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) \
-      stable'
-    apt-get update
-    apt-get install -y docker-ce docker-ce-cli containerd.io
-    usermod -aG docker vagrant
-  SHELL
+  config.vm.provision 'chef_solo' do |chef|
+    chef.arguments = "--chef-license accept"
+    chef.add_recipe "consul_node"
+  end
 end

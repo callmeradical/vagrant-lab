@@ -1,12 +1,12 @@
 #
-# Cookbook:: consul_node
+# Cookbook:: base
 # Spec:: default
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
 require 'spec_helper'
 
-describe 'consul_node::default' do
+describe 'base::default' do
   context 'When all attributes are default, on Ubuntu 18.04' do
     # for a complete list of available platforms and versions see:
     # https://github.com/chefspec/fauxhai/blob/master/PLATFORMS.md
@@ -20,10 +20,6 @@ describe 'consul_node::default' do
       expect(chef_run).to add_apt_repository('docker')
     end
 
-    it 'creates a new file called blob' do
-      expect(chef_run).to create_file('/tmp/blob')
-    end
-
     it 'installs some additional packages' do
       expect(chef_run).to install_package('curl')
       expect(chef_run).to install_package('ca-certificates')
@@ -33,14 +29,11 @@ describe 'consul_node::default' do
       expect(chef_run).to install_package('docker-ce')
       expect(chef_run).to install_package('docker-ce-cli')
       expect(chef_run).to install_package('containerd.io')
+      expect(chef_run).to install_package('unzip')
     end
 
     it 'modifiers the docker group for the vagrant user' do
       expect(chef_run).to modify_group('docker')
-    end
-
-    it 'downloads consul from hashicorp' do
-      expect(chef_run).to create_remote_file_if_missing('/tmp/consul.zip')
     end
   end
 end

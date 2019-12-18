@@ -1,7 +1,8 @@
 #
-# Cookbook:: consul_node
+# Cookbook:: base
 # Recipe:: default
 #
+# Copyright:: 2019, The Authors, All Rights Reserved.
 apt_repository 'docker' do
   uri 'https://download.docker.com/linux/ubuntu'
   key 'https://download.docker.com/linux/ubuntu/gpg'
@@ -34,14 +35,3 @@ group 'docker' do
   members 'vagrant'
 end
 
-consul_version = %w(1.6.2)
-
-file '/tmp/blob' do
-  action :create
-end
-
-remote_file '/tmp/consul.zip' do
-  source node.default['consul_url']
-  owner 'vagrant'
-  action :create_if_missing
-end

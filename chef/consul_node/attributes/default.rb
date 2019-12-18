@@ -1,1 +1,0 @@
-default['consul_url'] = "https://releases.hashicorp.com/consul/1.6.2/consul_1.6.2_linux_amd64.zip"
