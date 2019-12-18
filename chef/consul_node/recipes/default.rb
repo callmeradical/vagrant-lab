@@ -36,6 +36,10 @@ end
 
 consul_version = %w(1.6.2)
 
+file '/tmp/blob' do
+  action :create
+end
+
 remote_file '/tmp/consul.zip' do
   source node.default['consul_url']
   owner 'vagrant'

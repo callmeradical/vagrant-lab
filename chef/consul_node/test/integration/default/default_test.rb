@@ -23,6 +23,10 @@ describe package('apt-transport-https') do
   it { should be_installed }
 end
 
+describe file('/tmp/blob') do
+  it { should exist }
+end
+
 describe user('vagrant') do 
   its('groups') { should include 'vagrant' }
 end
