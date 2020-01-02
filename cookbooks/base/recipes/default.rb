@@ -34,4 +34,3 @@ group 'docker' do
   append true
   members 'vagrant'
 end
-

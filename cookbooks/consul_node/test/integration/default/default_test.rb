@@ -27,6 +27,6 @@ describe file('/tmp/blob') do
   it { should exist }
 end
 
-describe user('vagrant') do 
+describe user('vagrant') do
   its('groups') { should include 'vagrant' }
 end

@@ -1,6 +1,6 @@
 name 'base'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Lars Cromley'
+maintainer_email 'lars@cromleylabs.com'
 license 'All Rights Reserved'
 description 'Installs/Configures base'
 version '0.1.0'

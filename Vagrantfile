@@ -2,13 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
-  # config.vm.box = 'ubuntu/xenial64'
-
-  Vagrant.configure("2") do |config|
-	  config.vm.network "private_network", auto_config: true
-	end
+  config.vm.network 'private_network', auto_config: true
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -33,7 +27,7 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provision 'chef_solo' do |chef|
-    chef.arguments = "--chef-license accept"
-    chef.add_recipe "consul_node"
+    chef.arguments = '--chef-license accept'
+    chef.add_recipe 'consul_node'
   end
 end

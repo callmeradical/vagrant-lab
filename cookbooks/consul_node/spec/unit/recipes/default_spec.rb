@@ -20,6 +20,5 @@ describe 'consul_node::default' do
       expect(chef_run).to create_remote_file_if_missing('/tmp/consul.zip')
       expect(chef_run).to run_execute('extract_consul')
     end
-
   end
 end
