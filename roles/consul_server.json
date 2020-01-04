@@ -1,0 +1,18 @@
+{
+    "name": "consul_server",
+    "default_attributes": {
+        "attributes": {
+            "leader": false,
+            "static_ip": "192.168.95.3",
+            "server_count": 3,
+            "subnet": "192.168.95.0/24"
+        }
+    },
+    "json_class": "Chef::Role",
+    "run_list": [
+        "recipe[base::default]",
+        "recipe[consul_node::default]"
+    ],
+    "description": "A consul server",
+    "chef_type": "role"
+}
