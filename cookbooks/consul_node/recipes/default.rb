@@ -74,14 +74,13 @@ template '/opt/consul.d/consul.hcl' do
   action :create
 end
 
-if node['attributes']['server']
-  template '/opt/consul.d/server.hcl' do
-    source 'server.hcl.erb'
-    owner 'consul'
-    group 'consul'
-    mode '0755'
-    variables(servers: node['attributes']['server_count'])
-  end
+template '/opt/consul.d/server.hcl' do
+  source 'server.hcl.erb'
+  owner 'consul'
+  group 'consul'
+  mode '0755'
+  variables(servers: node['attributes']['server_count'])
+  only_if { node['attributes']['server'] }
 end
 
 service 'consul' do
