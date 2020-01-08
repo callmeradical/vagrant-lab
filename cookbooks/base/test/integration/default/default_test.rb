@@ -27,7 +27,7 @@ unless os.windows?
 
   describe file('/home/vagrant/.profile') do
     it { should exist }
-    its('content') { should match /export NOMAD_ADDR=/}
+    its('content') { should match /export NOMAD_ADDR=/ }
   end
 end
 

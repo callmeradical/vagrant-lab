@@ -5,10 +5,9 @@
 
 user 'consul'
 
-group 'consul' do 
+group 'consul' do
   members ['consul']
 end
-
 
 package 'unzip' do
   action :install
