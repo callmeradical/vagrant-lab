@@ -29,3 +29,5 @@ suites:
       inspec_tests:
         - test/integration/default
     attributes:
+      attributes:
+        subnet: 10.0.2.0/24

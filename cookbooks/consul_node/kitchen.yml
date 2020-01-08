@@ -26,7 +26,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[consule_node::default]
+      - recipe[consul_node::default]
     verifier:
       inspec_tests:
         - test/integration/default

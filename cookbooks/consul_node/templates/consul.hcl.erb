@@ -1,4 +1,4 @@
-datacenter = "dc1"
+datacenter = "<%= node['attributes']['datacenter'] %>"
 data_dir = "/opt/consul"
 encrypt = "YQD9e5usqEU1I01llREn/q8wcHH4zAB2zFxjYWa2cV0="
 retry_join = ["<%= node['attributes']['static_ip'] %>"]

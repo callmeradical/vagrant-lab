@@ -35,5 +35,10 @@ describe 'base::default' do
     it 'modifiers the docker group for the vagrant user' do
       expect(chef_run).to modify_group('docker')
     end
+
+    it 'finds the private ip address and exports the NOMAD_ADDR' do
+      expect(chef_run).to run_ruby_block('find_private_ip_address')
+      expect(chef_run).to create_template('/home/vagrant/.profile')
+    end
   end
 end

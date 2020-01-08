@@ -3,11 +3,13 @@
 # Recipe:: default
 #
 
-group 'consul'
+user 'consul'
 
-user 'consul' do
-  group 'consul'
+group 'consul' do 
+  members ['consul']
 end
+
+
 package 'unzip' do
   action :install
 end
@@ -23,13 +25,13 @@ execute 'extract_consul' do
   not_if { ::File.exist?('/usr/local/bin/consul') }
 end
 
-directory '/opt/consul.d' do
+directory '/opt/consul' do
   owner 'consul'
   group 'consul'
   action :create
 end
 
-directory '/opt/consul' do
+directory '/opt/consul.d' do
   owner 'consul'
   group 'consul'
   action :create
@@ -39,7 +41,7 @@ template '/etc/systemd/system/consul.service' do
   source 'consul_systemd.erb'
   owner 'root'
   group 'root'
-  mode '0755'
+  mode '0600'
 end
 
 ip_to_advertise = node['ipaddress']
@@ -69,7 +71,7 @@ template '/opt/consul.d/consul.hcl' do
   source 'consul.hcl.erb'
   owner 'consul'
   group 'consul'
-  mode '0755'
+  mode '0600'
   variables(ip_to_advertise: lazy { ip_to_advertise.to_s })
   action :create
 end
@@ -78,7 +80,7 @@ template '/opt/consul.d/server.hcl' do
   source 'server.hcl.erb'
   owner 'consul'
   group 'consul'
-  mode '0755'
+  mode '0600'
   variables(servers: node['attributes']['server_count'])
   only_if { node['attributes']['server'] }
 end

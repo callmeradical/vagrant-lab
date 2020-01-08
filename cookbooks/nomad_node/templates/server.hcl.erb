@@ -1,0 +1,8 @@
+# /opt/nomad.d/server.hcl
+
+data_dir = "/opt/nomad.d"
+
+server {
+  enabled          = <%= node['attributes']['server'] %>
+  bootstrap_expect = <%= node['attributes']['server_count'] %>
+}

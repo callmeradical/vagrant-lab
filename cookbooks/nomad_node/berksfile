@@ -1,0 +1,4 @@
+source 'https://supermarket.chef.io'
+
+group :integration do
+  cookbook 'consul_node', :path => '../consul_node'

@@ -15,18 +15,53 @@ describe port(80), :skip do
   it { should_not be_listening }
 end
 
-describe package('docker-ce') do
+describe user('consul') do
+  its('groups') { should include 'consul' }
+end
+
+describe group('consul') do
+  it { should exist }
+  its('members') { should include 'consul' }
+end
+
+describe package('unzip') do
   it { should be_installed }
 end
 
-describe package('apt-transport-https') do
-  it { should be_installed }
-end
-
-describe file('/tmp/blob') do
+describe file('/tmp/kitchen/cache/consul.zip') do
   it { should exist }
 end
 
-describe user('vagrant') do
-  its('groups') { should include 'vagrant' }
+describe file('/usr/local/bin/consul') do
+  it { should exist }
+end
+
+describe directory('/opt/consul.d') do
+  it { should exist }
+  its('group') { should eq 'consul' }
+end
+
+describe directory('/opt/consul') do
+  it { should exist }
+  its('group') { should eq 'consul' }
+end
+
+describe file('/etc/systemd/system/consul.service') do
+  it { should exist }
+  its('content') { should match /consul agent/ }
+  its('mode') { should cmp '0600' }
+end
+
+describe file('/opt/consul.d/consul.hcl') do
+  it { should exist }
+  its('mode') { should cmp '0600' }
+end
+
+describe file('/opt/consul.d/server.hcl') do
+  it { should exist }
+  its('mode') { should cmp '0600' }
+end
+
+describe service('consul') do
+  it { should be_running }
 end

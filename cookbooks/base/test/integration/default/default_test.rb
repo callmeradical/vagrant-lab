@@ -8,6 +8,27 @@ unless os.windows?
   describe user('root'), :skip do
     it { should exist }
   end
+
+  packages = %w(
+    curl unzip gnupg-agent
+    software-properties-common apt-transport-https
+    docker-ce docker-ce-cli containerd.io)
+
+  packages.each do |pkg|
+    describe package(pkg) do
+      it { should be_installed }
+    end
+  end
+
+  describe group('docker') do
+    it { should exist }
+    its('members') { should include 'vagrant' }
+  end
+
+  describe file('/home/vagrant/.profile') do
+    it { should exist }
+    its('content') { should match /export NOMAD_ADDR=/}
+  end
 end
 
 # This is an example test, replace it with your own test.
