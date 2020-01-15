@@ -21,6 +21,7 @@ packages = %w(
   docker-ce
   docker-ce-cli
   containerd.io
+  jq
 )
 # Copyright:: 2019, The Authors, All Rights Reserved.
 packages.each do |pkg|

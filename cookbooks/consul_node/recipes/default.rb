@@ -65,6 +65,22 @@ ruby_block 'find_private_ip_address' do
       end
     end
   end
+  action :create
+end
+
+template '/etc/systemd/resolved.conf' do
+  source 'resolved.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
+
+execute 'iptables update udp' do
+  command 'iptables -t nat -A OUTPUT -d localhost -p udp -m udp --dport 53 -j REDIRECT --to-ports 8600'
+end
+
+execute 'iptables update tcp' do
+  command 'iptables -t nat -A OUTPUT -d localhost -p tcp -m tcp --dport 53 -j REDIRECT --to-ports 8600'
 end
 
 template '/opt/consul.d/consul.hcl' do
@@ -74,6 +90,7 @@ template '/opt/consul.d/consul.hcl' do
   mode '0600'
   variables(ip_to_advertise: lazy { ip_to_advertise.to_s })
   action :create
+  notifies :restart, 'service[consul]', :delayed
 end
 
 template '/opt/consul.d/server.hcl' do
@@ -82,6 +99,7 @@ template '/opt/consul.d/server.hcl' do
   group 'consul'
   mode '0600'
   variables(servers: node['attributes']['server_count'])
+  notifies :restart, 'service[consul]', :delayed
   only_if { node['attributes']['server'] }
 end
 

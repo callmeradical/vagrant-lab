@@ -30,6 +30,7 @@ describe 'base::default' do
       expect(chef_run).to install_package('docker-ce-cli')
       expect(chef_run).to install_package('containerd.io')
       expect(chef_run).to install_package('unzip')
+      expect(chef_run).to install_package('jq')
     end
 
     it 'modifiers the docker group for the vagrant user' do

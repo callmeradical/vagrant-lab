@@ -2,4 +2,7 @@ datacenter = "<%= node['attributes']['datacenter'] %>"
 data_dir = "/opt/consul"
 encrypt = "YQD9e5usqEU1I01llREn/q8wcHH4zAB2zFxjYWa2cV0="
 retry_join = ["<%= node['attributes']['static_ip'] %>"]
-advertise_addr = "<%= @ip_to_advertise%>"
+bind_addr = "<%= @ip_to_advertise %>"
+client_addr = "0.0.0.0"
+advertise_addr = "<%= @ip_to_advertise %>"
+ui = true
