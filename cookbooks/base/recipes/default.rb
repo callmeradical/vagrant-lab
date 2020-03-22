@@ -22,12 +22,17 @@ packages = %w(
   docker-ce-cli
   containerd.io
   jq
+  htop
 )
 # Copyright:: 2019, The Authors, All Rights Reserved.
 packages.each do |pkg|
   package pkg.to_s do
     action :install
   end
+end
+
+file '/tmp/test' do
+  action :create
 end
 
 group 'docker' do
