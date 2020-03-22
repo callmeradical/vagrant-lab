@@ -62,6 +62,10 @@ describe file('/opt/consul.d/server.hcl') do
   its('mode') { should cmp '0600' }
 end
 
+describe file('/etc/systemd/resolved.conf') do
+  it { should exist }
+  its('content') { should match /domains=~consul/ }
+
 describe service('consul') do
   it { should be_running }
 end

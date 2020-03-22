@@ -8,6 +8,11 @@ client {
   enabled = true
 }
 <% end %>
+advertise {
+  http =  "<%= @ip_to_advertise %>:4646"
+  rpc  =  "<%= @ip_to_advertise %>:4647"
+  serf =  "<%= @ip_to_advertise %>:4648"
+}
 
 #consul {
   ## The address to the Consul agent.

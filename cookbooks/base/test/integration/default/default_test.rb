@@ -12,7 +12,7 @@ unless os.windows?
   packages = %w(
     curl unzip gnupg-agent
     software-properties-common apt-transport-https
-    docker-ce docker-ce-cli containerd.io)
+    docker-ce docker-ce-cli containerd.io jq)
 
   packages.each do |pkg|
     describe package(pkg) do
