@@ -8,6 +8,10 @@ unless os.windows?
   describe user('root'), :skip do
     it { should exist }
   end
+
+  describe user('concourse'), do
+    it { should exist }
+  end
 end
 
 # This is an example test, replace it with your own test.
