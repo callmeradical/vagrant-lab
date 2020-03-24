@@ -15,7 +15,7 @@ Small demo created as a lab experiment for the Cloud Native Development Guild pa
 
 * re:Invent (Multiple Years)
 * AWS Tech:Connect (Multiple Cities)
-* Philly DevOps meetup (Organizer and Presenter)
+* Philly DevOps meetup (Co-Organizer and Presenter)
 * Company Advertising, Dispelling the Myths of DevOps (2nd Watch)
 
 ## Publications
@@ -23,7 +23,6 @@ Small demo created as a lab experiment for the Cloud Native Development Guild pa
 * containerjournal.com
 * aws.amazon.com/blogs
 * cromleylabs.com
-
 
 
 ## Demo(s)
